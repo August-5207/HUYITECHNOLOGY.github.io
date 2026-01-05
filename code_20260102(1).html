@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖癔科技 - 专注网络技术与数字化解决方案</title>
+    <style>
+        /* 基础重置 - 极简高效 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        :root {
+            --tech-blue: #165DFF; 
+            --tech-blue-light: #E8F3FF; 
+            --tech-blue-dark: #0E42D2; 
+            --text-dark: #0F2E68; 
+            --gray-bg: #f5f7fa;
+            --transition: all 0.3s ease;
+        }
+        body {
+            color: #333;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+            background-color: var(--gray-bg);
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        ul {
+            list-style: none;
+        }
+        .btn {
+            background: var(--tech-blue);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: var(--tech-blue-dark);
+        }
+        .section {
+            padding: 5rem 5%;
+            background: #fff; /* 纯白背景，突出板块 */
+            margin: 2rem auto;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08); /* 加深阴影，增强背景质感 */
+            scroll-margin-top: 120px;
+        }
+        .section-gray {
+            background: #f0f7ff; /* 加深浅蓝色背景，更明显 */
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            width: 70px;
+            height: 4px;
+            background: var(--tech-blue);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 导航栏 - 保留基础动画 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98); /* 加深不透明度，背景更实 */
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--tech-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .logo img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+        .logo span {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+            margin-left: 0.4rem;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        /* 汉堡菜单 - 保留基础切换动画 */
+        .menu-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        .menu-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--text-dark);
+            transition: var(--transition);
+        }
+        .menu-btn.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-btn.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        /* 导航菜单 - 保留基础展开/收起 */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 260px;
+            height: 100vh;
+            background: #fff; /* 纯白背景，清晰可见 */
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2); /* 加深阴影 */
+            padding: 80px 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 9998;
+            overflow-y: auto;
+        }
+        .nav-menu.active {
+            transform: translateX(0);
+        }
+        .nav-menu li {
+            margin-bottom: 1.2rem;
+        }
+        .nav-menu a {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease; /* 只保留颜色变化，去掉位移 */
+        }
+        .nav-menu a:hover {
+            color: var(--tech-blue);
+        }
+
+        /* 英雄区 - 强化背景 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #e0ecff, #f0f7ff); /* 加深渐变背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 80px;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(https://picsum.photos/id/1/1920/1080) center/cover no-repeat;
+            opacity: 0.15; /* 提高背景图透明度，更明显 */
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        .hero h1 span {
+            color: var(--tech-blue);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #444;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* 核心服务 - 强化卡片背景 */
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 加深阴影 */
+            border-top: 4px solid var(--tech-blue);
+            transition: box-shadow 0.3s ease; /* 只保留阴影变化 */
+        }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        .card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* 关于我们 - 强化背景区分 */
+        .about-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-img {
+            flex: 1;
+            min-width: 320px;
+        }
+        .about-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* 加深阴影 */
+        }
+        .about-text {
+            flex: 1;
+            min-width: 320px;
+        }
+        .about-text h3 {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #444;
+            font-size: 1rem;
+        }
+        .about-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--tech-blue), transparent);
+        }
+
+        /* 平等协调 - 强化背景 */
+        .equality-coord {
+            padding: 5rem 5%;
+            background: linear-gradient(180deg, #f0f7ff, #e0ecff); /* 加深渐变 */
+            margin: 2rem auto;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            scroll-margin-top: 120px;
+        }
+        .equality-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            position: relative;
+        }
+        .equality-title::after {
+            content: "";
+            width: 70px;
+            height: 4px;
+            background: var(--tech-blue);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .equality-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .equality-card {
+            background: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--tech-blue-dark);
+            transition: box-shadow 0.3s ease;
+        }
+        .equality-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .equality-card h3 {
+            font-size: 1.5rem;
+            color: var(--tech-blue-dark);
+            margin-bottom: 1rem;
+        }
+        .equality-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* 公司股东 - 强化背景 */
+        .shareholder-desc {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            border-left: 4px solid var(--tech-blue);
+        }
+
+        /* 公司高层 - 强化背景 */
+        .leader-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+        .leader-item {
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #fff;
+            border-left: 4px solid var(--tech-blue);
+            transition: box-shadow 0.3s ease;
+        }
+        .leader-item:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .leader-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid var(--tech-blue);
+        }
+        .leader-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .leader-info {
+            flex: 1;
+        }
+        .leader-top {
+            font-size: 1rem;
+            color: var(--tech-blue);
+            margin-bottom: 0.4rem;
+            font-weight: bold;
+        }
+        .leader-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .leader-ename {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+            font-style: italic;
+        }
+        .leader-contact {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* 8项网格 - 强化背景 */
+        .eight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .info-card {
+            padding: 1.8rem;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--tech-blue);
+            transition: box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .info-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        .info-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* 公司位置 - 强化背景 */
+        .location-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+        .location-category {
+            flex: 1;
+            min-width: 280px;
+        }
+        .location-category h3 {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--tech-blue);
+        }
+        .location-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.2rem;
+        }
+        .location-card {
+            padding: 1.2rem;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 3px solid var(--tech-blue);
+            transition: box-shadow 0.3s ease;
+        }
+        .location-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .location-card h4 {
+            color: var(--tech-blue);
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+        .location-card p {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* 公司动态 - 强化背景 */
+        .custom-news {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--tech-blue);
+        }
+        .news-header {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+        .news-list-custom {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.9;
+        }
+        .news-list-custom li {
+            margin-bottom: 0.6rem;
+            list-style-type: decimal;
+            margin-left: 1.8rem;
+        }
+
+        /* 员工风采 - 强化背景 */
+        .staff-photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+        .photo-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 180px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-top: 3px solid var(--tech-blue);
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-item::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.6rem;
+            background: linear-gradient(transparent, rgba(22, 93, 255, 0.9));
+            color: #fff;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* 公司合作 - 强化背景 */
+        .custom-partner {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--tech-blue);
+        }
+        .partner-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+        }
+        .partner-list-custom {
+            margin-bottom: 1.5rem;
+        }
+        .partner-list-custom h4 {
+            color: var(--tech-blue);
+            margin-bottom: 0.8rem;
+        }
+        .partner-list-custom ol, .partner-list-custom ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .partner-list-custom li {
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+            color: #555;
+        }
+        .coop-contact {
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        .coop-contact h4 {
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+        }
+        .coop-contact p {
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* 举报维权 - 强化背景 */
+        .report-rights {
+            padding: 5rem 5%;
+            background: #f5f9ff; /* 加深背景色 */
+            margin: 2rem auto;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            scroll-margin-top: 120px;
+        }
+        .report-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            position: relative;
+        }
+        .report-title::after {
+            content: "";
+            width: 70px;
+            height: 4px;
+            background: var(--tech-blue);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .report-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 3px solid var(--tech-blue);
+        }
+        .report-content p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .report-list {
+            margin: 1.5rem 0 2rem;
+            padding-left: 1.5rem;
+        }
+        .report-list li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            list-style: disc;
+        }
+        .report-channel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .report-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+        .report-item span {
+            color: var(--tech-blue);
+            font-weight: bold;
+        }
+
+        /* 联系我们 - 强化背景 */
+        .contact {
+            background: linear-gradient(135deg, #0a3b99, var(--tech-blue)); /* 加深渐变 */
+            color: #fff;
+            box-shadow: none;
+        }
+        .contact .section-title {
+            color: #fff;
+        }
+        .contact .section-title::after {
+            background: #fff;
+        }
+        .contact p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            text-align: center;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* 回到顶部 - 保留基础动画 */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--tech-blue);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(22, 93, 255, 0.3);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background-color: var(--tech-blue-dark);
+        }
+
+        /* 页脚 - 强化背景 */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: #0a3b99; /* 加深背景色 */
+            color: #c0d3ff;
+            margin-top: 2rem;
+        }
+
+        /* 响应式 - 保持正常显示 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .leader-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-menu {
+                width: 240px;
+                padding: 70px 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 正常可用 -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMvaxpQY77py05mW35XdSseTHAC5ZQIAAC3BwAAismEFaznOi09N4VdzYE.jpg" alt="湖癔科技LOGO">
+            湖癔科技 <span>(湖癔网络科技)</span>
+        </div>
+        <div class="nav-right">
+            <div class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="#contact" class="btn">咨询合作</a>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#services">核心服务</a></li>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#equality">平等协调</a></li>
+            <li><a href="#shareholders">公司股东</a></li>
+            <li><a href="#leaders">公司高层</a></li>
+            <li><a href="#status">公司状态</a></li>
+            <li><a href="#property">公司财产</a></li>
+            <li><a href="#location">公司位置</a></li>
+            <li><a href="#permission">公司权限</a></li>
+            <li><a href="#news">公司动态</a></li>
+            <li><a href="#staff-photos">员工风采</a></li>
+            <li><a href="#partners">公司合作</a></li>
+            <li><a href="#report-rights">举报维权</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- 英雄区 - 背景强化 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="hero-subtitle">湖癔科技 | HUYITECHNOLOGY</p>
+            <h1>专注网络技术 <span>赋能数字化未来</span></h1>
+            <p>湖癔科技（湖癔网络科技），致力于为个人与企业提供专业的网络优化、隐私安全及数字化转型解决方案</p>
+            <a href="#services" class="btn">了解核心服务</a>
+        </div>
+    </section>
+
+    <!-- 核心服务 - 背景强化 -->
+    <section class="section" id="services">
+        <div class="section-content">
+            <h2 class="section-title">核心服务</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <h3>智能防火墙部署</h3>
+                    <p>搭建高等级智能防火墙系统，精准识别并拦截恶意访问、DDoS攻击、端口扫描等网络威胁，支持自定义防护规则，筑牢网络边界安全防线。</p>
+                </div>
+                <div class="card">
+                    <h3>网络拦截防御系统</h3>
+                    <p>研发高性能网络拦截引擎，实时监测网络流量，拦截病毒数据包、钓鱼链接、恶意脚本等风险内容，累计成功拦截网络攻击超2700次。</p>
+                </div>
+                <div class="card">
+                    <h3>网络安全优化</h3>
+                    <p>提供路由器性能调校、DNS优选配置、局域网设备智能管理、带宽提速优化服务，同时搭配hosts文件定制化广告屏蔽，兼顾网络流畅度与安全性。</p>
+                </div>
+                <div class="card">
+                    <h3>数据隐私防护运维</h3>
+                    <p>提供数据加密传输方案、网络访问权限管控、7×24小时安全运维服务，全方位保障个人隐私与企业核心数据安全，规避信息泄露风险。</p>
+                </div>
+                <div class="card">
+                    <h3>企业内网搭建与运维</h3>
+                    <p>为企业定制隔离式内网架构，实现部门数据分级访问、设备统一管控，搭配常态化运维巡检，保障内网稳定运行且隔绝外部网络风险。</p>
+                </div>
+                <div class="card">
+                    <h3>网络安全应急响应</h3>
+                    <p>提供7×24小时网络安全应急响应服务，针对数据泄露、病毒入侵、系统瘫痪等突发安全事件，快速定位问题并实施止损、修复与溯源方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 - 背景强化 -->
+    <section class="section section-gray" id="about">
+        <div class="section-content">
+            <h2 class="section-title">关于我们</h2>
+            <div class="about-wrap">
+                <div class="about-section">
+                    <div class="about-img">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMvaxpQY77py05mW35XdSseTHAC5ZQIAAC3BwAAismEFaznOi09N4VdzYE.jpg" alt="湖癔科技介绍图">
+                    </div>
+                    <div class="about-text">
+                        <h3>关于湖癔科技</h3>
+                        <p>湖癔科技（HUYITECHNOLOGY），又名湖癔网络科技，总部位于安徽合肥，在多省市及海外设有分部，是一家专注于网络技术研发与数字化服务的创新型企业。</p>
+                        <p>团队汇聚了一批深耕网络优化、隐私安全、软件开发领域的专业人才，拥有丰富的技术实践经验与项目落地能力。</p>
+                        <p>我们始终以客户需求为导向，坚持技术创新与服务升级，为个人用户提供高效、安全的网络使用方案，为企业客户量身打造定制化的数字化转型路径。</p>
+                    </div>
+                </div>
+                <div class="about-divider"></div>
+                <div class="about-section">
+                    <div class="about-img">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMvbJpQY8EUWNf8N0_xEbJIj5NUqmrQAAC4hwAAismEFbJ6arnvuPbkTYE.png" alt="平等协调介绍图">
+                    </div>
+                    <div class="about-text">
+                        <h3>关于湖癔科技平等协调</h3>
+                        <p>湖癔科技平等协调（HUYI SCIENCE AND TECHNOLOGY EQUAL COORDINATION）是湖癔科技的核心文化基因，我们对内构建无层级壁垒的协作环境，保障每位员工的话语权、参与权与发展权，让创意与能力成为团队价值评判的唯一标准。</p>
+                        <p>对外奉行开放共赢的合作准则，摒弃技术垄断思维，与合作伙伴、行业友商、客户群体建立平等对话机制，共享技术成果与行业经验，推动产业生态良性发展。</p>
+                        <p>我们积极倡导公平竞争的行业秩序，投身网络安全技术科普与公益推广，助力不同规模的企业与个人筑牢网络安全防线，共同迈向数字化的高质量发展新阶段。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 平等协调 - 背景强化 -->
+    <section class="equality-coord" id="equality">
+        <h2 class="equality-title">湖癔科技平等协调</h2>
+        <div class="equality-content">
+            <div class="equality-card">
+                <h3>核心理念</h3>
+                <p>以平等为基石，以协作为纽带，构建"无层级、重能力、共成长"的组织生态。打破传统管理壁垒，让每个岗位的价值都能被看见、被尊重，让每个创意都能获得落地的机会。</p>
+            </div>
+            <div class="equality-card">
+                <h3>内部协作机制</h3>
+                <p>实行"项目制+导师制"双轨模式，员工可自主选择参与项目，跨部门协作无权限障碍；设立"创意孵化基金"，支持员工发起创新项目；定期开展技能分享会，促进知识平等流通。</p>
+            </div>
+            <div class="equality-card">
+                <h3>外部合作原则</h3>
+                <p>无论客户规模大小、合作伙伴行业地位高低，均享受同等专业的服务与合作待遇；建立透明化合作流程，所有合作方均能获取平等的信息知情权；拒绝恶意竞争，推动行业资源共享。</p>
+            </div>
+            <div class="equality-card">
+                <h3>社会责任践行</h3>
+                <p>面向中小企业及创业者提供免费网络安全咨询服务，缩小数字鸿沟；开展校园公益讲座，普及网络安全知识；建立人才培养计划，为行业输送多元化技术人才，促进就业平等。</p>
+            </div>
+            <div class="equality-card">
+                <h3>发展目标</h3>
+                <p>打造行业内平等协作标杆企业，让平等文化渗透到技术研发、客户服务、合作共赢的每一个环节；通过平等协作模式激发组织活力，实现企业、员工、合作伙伴、社会的多方共赢。</p>
+            </div>
+            <div class="equality-card">
+                <h3>实施成果</h3>
+                <p>内部员工满意度达95%，核心人才留存率超90%；与不同规模企业建立平等合作关系30+家；公益服务覆盖人群超5000人；相关协作模式获得行业内多项认可。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司股东 - 背景强化 -->
+    <section class="section" id="shareholders">
+        <div class="section-content">
+            <h2 class="section-title">公司股东</h2>
+            <div class="shareholder-desc">
+                本公司的股东就是屏幕前的你～
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司高层 - 背景强化 -->
+    <section class="section section-gray" id="leaders">
+        <div class="section-content">
+            <h2 class="section-title">公司高层</h2>
+            <div class="leader-list">
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEN9alpSOoqhkJT52V3aNmaQvOnx_KLgAAC2ywAAi-0SVYOBnBYJ0UVGDYE.jpg" alt="湖癔">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">创始人：湖癔 <span class="leader-ename">Lake Hysteria</span></div>
+                        <div class="leader-contact">
+                            QQ号：3576607747<br>
+                            邮箱：3576607747@qq.com
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEN9ahpSOoqE-wd-oU7ZF7YVQb_JW_RlQAC2iwAAi-0SVbQ3abuladx6jYE.jpg" alt="欲见花盛开">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">总经理：欲见花盛开 <span class="leader-ename">Too see a flower in full bloom</span></div>
+                        <div class="leader-contact">
+                            QQ号：3549437807<br>
+                            邮箱：3549437807@qq.com
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEN9appSOoqYIAnWth5Pj2qVPjzMnoJDwAC3CwAAi-0SVY9O5sSxSs2OzYE.jpg" alt="YCJ">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">董事长：YCJ <span class="leader-ename">Yan chuan jie</span></div>
+                        <div class="leader-contact">
+                            QQ号：391145169<br>
+                            邮箱：3911451619@qq.com
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEN9atpSOorlz2-3DdNbqhTTcMjZoJnJQAC3SwAAi-0SVYr83L1RUb5QTYE.jpg" alt="彼得帕克">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">运营：彼得帕克 <span class="leader-ename">Peter Park</span></div>
+                        <div class="leader-contact">
+                            QQ号：3305362657<br>
+                            邮箱：3305362657@qq.com
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEN9axpSOorBO0xfxvBYHKm6kqgnoLdIQAC3iwAAi-0SVbBFbC48ZdgnzYE.jpg" alt="誓">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">运营：誓 <span class="leader-ename">Oath</span></div>
+                        <div class="leader-contact">
+                            QQ号：242334157<br>
+                            邮箱：242334157@qq.com
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMvaxpQY77py05mW35XdSseTHAC5ZQIAAC3BwAAismEFaznOi09N4VdzYE.jpg" alt="朱淳熙">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技 | HUYITECHNOLOGY</div>
+                        <div class="leader-name">超级管理员：朱淳熙 <span class="leader-ename">Zhu Chunxi</span></div>
+                        <div class="leader-contact">
+                            QQ号：暂无公开<br>
+                            邮箱：暂无公开
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar">
+                        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMvbJpQY8EUWNf8N0_xEbJIj5NUqmrQAAC4hwAAismEFbJ6arnvuPbkTYE.png" alt="朱梓桦">
+                    </div>
+                    <div class="leader-info">
+                        <div class="leader-top">湖癔科技平等协调 | HUYI SCIENCE AND TECHNOLOGY EQUAL COORDINATION</div>
+                        <div class="leader-name">超级管理员：朱梓桦 <span class="leader-ename">Zhu Zihua</span></div>
+                        <div class="leader-contact">
+                            QQ号：暂无公开<br>
+                            邮箱：暂无公开
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司状态 - 背景强化 -->
+    <section class="section" id="status">
+        <div class="section-content">
+            <h2 class="section-title">公司状态</h2>
+            <div class="eight-grid">
+                <div class="info-card">
+                    <h3>企业资质</h3>
+                    <p>国家高新技术企业认证、网络安全服务资质、软件著作权10项+</p>
+                </div>
+                <div class="info-card">
+                    <h3>运营记录</h3>
+                    <p>无经营异常记录，无行政处罚，合规运营口碑良好</p>
+                </div>
+                <div class="info-card">
+                    <h3>信用评级</h3>
+                    <p>纳税信用等级A级，银行信用评级AAA级</p>
+                </div>
+                <div class="info-card">
+                    <h3>团队规模</h3>
+                    <p>核心技术团队30+人，运营团队15人，市场团队10人</p>
+                </div>
+                <div class="info-card">
+                    <h3>服务网点</h3>
+                    <p>全国服务网点5个，覆盖主要经济发达区域</p>
+                </div>
+                <div class="info-card">
+                    <h3>增长数据</h3>
+                    <p>年增长率35%，客户留存率超85%，复购率稳步提升</p>
+                </div>
+                <div class="info-card">
+                    <h3>技术储备</h3>
+                    <p>自研核心算法3项，与3家高校建立技术合作关系</p>
+                </div>
+                <div class="info-card">
+                    <h3>行业认证</h3>
+                    <p>ISO9001质量管理体系认证，信息安全管理体系认证</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司财产 - 背景强化 -->
+    <section class="section section-gray" id="property">
+        <div class="section-content">
+            <h2 class="section-title">公司财产</h2>
+            <div class="eight-grid">
+                <div class="info-card">
+                    <h3>总资产</h3>
+                    <p>765万16元</p>
+                </div>
+                <div class="info-card">
+                    <h3>总部场地</h3>
+                    <p>合肥总部办公场地1200㎡，产权清晰</p>
+                </div>
+                <div class="info-card">
+                    <h3>服务器集群</h3>
+                    <p>服务器集群50台+，涵盖高性能计算与存储设备</p>
+                </div>
+                <div class="info-card">
+                    <h3>办公设备</h3>
+                    <p>办公设备200+套，满足全团队高效办公需求</p>
+                </div>
+                <div class="info-card">
+                    <h3>实验设施</h3>
+                    <p>网络安全测试实验室2个，配备专业检测设备</p>
+                </div>
+                <div class="info-card">
+                    <h3>专利资产</h3>
+                    <p>网络优化相关专利5项，隐私安全技术专利3项</p>
+                </div>
+                <div class="info-card">
+                    <h3>软件资产</h3>
+                    <p>自研软件平台8个，具备独立知识产权</p>
+                </div>
+                <div class="info-card">
+                    <h3>商标资产</h3>
+                    <p>商标注册12类，覆盖核心业务与品牌延伸领域</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司位置 - 背景强化 -->
+    <section class="section" id="location">
+        <div class="section-content">
+            <h2 class="section-title">公司位置</h2>
+            <div class="location-wrap">
+                <div class="location-category">
+                    <h3>总部</h3>
+                    <div class="location-list">
+                        <div class="location-card">
+                            <h4>总部地址</h4>
+                            <p>安徽合肥</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-category">
+                    <h3>国内分部</h3>
+                    <div class="location-list">
+                        <div class="location-card">
+                            <h4>分部一</h4>
+                            <p>湖北宜昌</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部二</h4>
+                            <p>湖北武汉</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部三</h4>
+                            <p>安徽亳州</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部四</h4>
+                            <p>广东深圳</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-category">
+                    <h3>国外分部</h3>
+                    <div class="location-list">
+                        <div class="location-card">
+                            <h4>分部一</h4>
+                            <p>洛杉矶</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部二</h4>
+                            <p>马赛</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部三</h4>
+                            <p>雅典</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部四</h4>
+                            <p>柏林</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部五</h4>
+                            <p>慕尼黑</p>
+                        </div>
+                        <div class="location-card">
+                            <h4>分部六</h4>
+                            <p>圣彼得堡</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司权限 - 背景强化 -->
+    <section class="section section-gray" id="permission">
+        <div class="section-content">
+            <h2 class="section-title">公司权限</h2>
+            <div class="eight-grid">
+                <div class="info-card">
+                    <h3>独立法人资格</h3>
+                    <p>具备独立法人资格，可独立开展各类经营活动</p>
+                </div>
+                <div class="info-card">
+                    <h3>合同签订权限</h3>
+                    <p>有权代表企业签订各类商业合作与服务合同</p>
+                </div>
+                <div class="info-card">
+                    <h3>资质申请权限</h3>
+                    <p>可自主申请各类行业资质与技术认证证书</p>
+                </div>
+                <div class="info-card">
+                    <h3>技术研发权限</h3>
+                    <p>拥有独立技术研发、产品迭代与方案创新权限</p>
+                </div>
+                <div class="info-card">
+                    <h3>市场拓展权限</h3>
+                    <p>可在国内外市场自主开展业务拓展与品牌推广</p>
+                </div>
+                <div class="info-card">
+                    <h3>合作洽谈权限</h3>
+                    <p>有权与各类企业、机构进行合作项目洽谈对接</p>
+                </div>
+                <div class="info-card">
+                    <h3>知识产权权限</h3>
+                    <p>可自主申请、持有、转让各类知识产权</p>
+                </div>
+                <div class="info-card">
+                    <h3>服务定价权限</h3>
+                    <p>具备自主制定服务价格与套餐体系的权限</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司动态 - 背景强化 -->
+    <section class="section" id="news">
+        <div class="section-content">
+            <h2 class="section-title">公司动态</h2>
+            <div class="custom-news">
+                <div class="news-header">湖癔科技公司动态</div>
+                <ol class="news-list-custom">
+                    <li>2025年9月：湖癔科技成立</li>
+                    <li>2025年10月：湖癔科技制定全新LOGO，同时拦截病毒1047次</li>
+                    <li>2025年11月：湖癔科技进行LOGO改版，并且拦截网络攻击2796次</li>
+                    <li>2025年12月：湖癔科技增加新部门</li>
+                    <li>2025年12月11日：湖癔科技新部门制定全新LOGO</li>
+                    <li>2025年12月15日：湖癔科技出现16万破产资金情况</li>
+                    <li>2025年12月20日：湖癔科技还完16万破产资金</li>
+                    <li>2025年12月21日：湖癔科技恢复正常运营</li>
+                    <li>2025年12月23日：湖癔科技官方快手号解封</li>
+                    <li>2025年12月31日：湖癔科技全体员工放假</li>
+                    <li>2026年1月1日：湖癔科技进行线上跨年活动</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- 员工风采 - 背景强化 -->
+    <section class="section section-gray" id="staff-photos">
+        <div class="section-content">
+            <h2 class="section-title">员工风采</h2>
+            <div class="staff-photos">
+                <div class="photo-item" data-name="创始人">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMuntpQTq8gKQS6Nq3BMTS4usnAAFSeo4AAq8kAAIrJghW2chXyktpPv42BA.jpg" alt="创始人">
+                </div>
+                <div class="photo-item" data-name="总经理">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMunVpQTnnk1nkvuXdeEdR1ttIWDt2qwACqSQAAismCFY4z6cz5x3y2jYE.jpg" alt="总经理">
+                </div>
+                <div class="photo-item" data-name="董事长">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMuohpQTri__JvGSMKFmrwxW48GdL_GQACxSQAAismCFZtLZeKdaPWdDYE.jpg" alt="董事长">
+                </div>
+                <div class="photo-item" data-name="运营商">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEMuoBpQTrKzzSQlqMEebNFtnVPwN8O-wACtCQAAismCFb6gEgvJWBoJDYE.jpg" alt="运营商">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 公司合作 - 背景强化 -->
+    <section class="section" id="partners">
+        <div class="section-content">
+            <h2 class="section-title">公司合作</h2>
+            <div class="custom-partner">
+                <div class="partner-title">湖癔科技 · 开放共赢 携手同行</div>
+                <p style="text-align: center; margin-bottom: 2rem; color: #555;">以技术为桥梁，以信任为基石，诚邀全球伙伴共创数字化未来</p>
+                <div class="partner-list-custom">
+                    <h4>✅ 已达成深度合作的伙伴</h4>
+                    <ol>
+                        <li>月兔工作室（音乐领域） - 联合打造音乐版权保护与网络传播安全方案，保障音乐作品线上分发安全</li>
+                        <li>小战工作室 - 共建企业级网络优化解决方案，服务超200家中小企业客户</li>
+                    </ol>
+                    <h4>✅ 合作方向与模式</h4>
+                    <ul style="list-style: disc;">
+                        <li><strong>技术共建</strong>：网络安全、隐私防护、数据优化领域联合研发</li>
+                        <li><strong>渠道合作</strong>：产品代理、区域分销、行业解决方案打包推广</li>
+                        <li><strong>生态联盟</strong>：与云服务商、硬件厂商、科研机构共建产业生态</li>
+                        <li><strong>定制服务</strong>：为合作伙伴提供专属技术支持与方案定制</li>
+                    </ul>
+                    <h4>✅ 合作优势</h4>
+                    <ul style="list-style: disc;">
+                        <li>自研核心技术加持，提供高竞争力的产品与方案</li>
+                        <li>灵活的合作政策，按需定制分成与支持体系</li>
+                        <li>7×24小时技术运维团队，保障合作项目稳定落地</li>
+                        <li>品牌联合推广资源，助力合作伙伴拓展市场</li>
+                    </ul>
+                </div>
+                <div class="coop-contact">
+                    <h4>📩 合作洽谈通道</h4>
+                    <p>主对接人：创始人 湖癔 | QQ：3576607747</p>
+                    <p>备用对接人：运营 彼得帕克 | QQ：3305362657</p>
+                    <p style="margin-top: 0.5rem; color: var(--tech-blue-dark);">合作申请需提供：企业资质/个人履历 + 合作意向方案</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 举报维权 - 背景强化 -->
+    <section class="report-rights" id="report-rights">
+        <h2 class="report-title">举报维权</h2>
+        <div class="report-content">
+            <p>为维护健康的网络环境，保障用户合法权益，针对网络社交平台（如QQ、微信等）出现的不良行为，我们开通举报维权通道。若你遇到以下情况，可通过官方渠道反馈，我们将协同相关部门核实处理：</p>
+            <ul class="report-list">
+                <li>网络辱骂、人身攻击、恶意骚扰等不文明行为；</li>
+                <li>传播色情、低俗、暴力等违规内容；</li>
+                <li>网络诈骗、虚假宣传、诱导消费等侵权行为；</li>
+                <li>盗用他人信息、冒充他人身份等违法行为；</li>
+                <li>其他违反网络治安管理规定的不良行为。</li>
+            </ul>
+            <p><strong>重要提示</strong>：举报时请提供完整证据（聊天截图、对方账号信息、时间节点等），确保信息真实有效，我们将严格保护举报人的隐私安全，3个工作日内反馈处理进度。</p>
+            <div class="report-channel">
+                <div class="report-item">
+                    <span>📩 举报邮箱：</span>
+                    <span>HUYIREPORT@Outlook.com</span>
+                </div>
+                <div class="report-item">
+                    <span>💬 举报QQ：</span>
+                    <span>3576607747（创始人湖癔）</span>
+                </div>
+                <div class="report-item">
+                    <span>⌛ 处理时效：</span>
+                    <span>1-3个工作日（紧急情况可备注优先处理）</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 - 背景强化 -->
+    <section class="section contact" id="contact">
+        <div class="section-content">
+            <h2 class="section-title">联系我们</h2>
+            <p>如有合作需求、技术咨询或业务洽谈，欢迎通过以下方式联系我们</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>邮箱：HUYITECHNOLOGY@Outlook.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>QQ邮箱：暂不支持提供</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>电话：暂不支持提供</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 - 背景强化 -->
+    <footer class="footer">
+        <p>© 2026 湖癔科技（HUYITECHNOLOGY）版权所有</p>
+    </footer>
+
+    <!-- 回到顶部 - 正常可用 -->
+    <div class="back-to-top-top" id="backToTop">↑</div>
+
+    <!-- JS保持简洁，功能正常 -->
+    <script>
+        // 汉堡菜单展开/收起
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        menuBtn.addEventListener('click', function() {
+            menuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // 点击菜单项关闭菜单
+        const menuItems = navMenu.querySelectorAll('a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // 回到顶部
+        const backToTop = document.getElementById('backToTop');
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 滚动显示/隐藏回到顶部按钮
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
